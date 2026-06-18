@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calculator</title>
+    <title>ASIIMWE Calculator</title>
     <style>
         * {
             margin: 0;
@@ -25,20 +25,47 @@
             border-radius: 20px;
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
             padding: 20px;
-            width: 320px;
+            width: 400px;
+        }
+
+        .title {
+            text-align: center;
+            color: #667eea;
+            font-size: 1.5em;
+            font-weight: bold;
+            margin-bottom: 20px;
         }
 
         .display {
             background: #333;
             color: #fff;
-            font-size: 2.5em;
-            padding: 20px;
+            font-size: 1.2em;
+            padding: 15px;
             border-radius: 10px;
             text-align: right;
-            margin-bottom: 20px;
+            margin-bottom: 10px;
             word-wrap: break-word;
             word-break: break-all;
+            min-height: 50px;
+            line-height: 1.5;
+        }
+
+        .solution {
+            background: #667eea;
+            color: #fff;
+            font-size: 1.3em;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            margin-bottom: 20px;
             min-height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            word-wrap: break-word;
+            word-break: break-all;
+            line-height: 1.5;
         }
 
         .buttons {
@@ -100,7 +127,9 @@
 </head>
 <body>
     <div class="calculator">
+        <div class="title">🧮 ASIIMWE Calculator</div>
         <div class="display" id="display">0</div>
+        <div class="solution" id="solution">ASIIMWE... the answer is "0"</div>
         <div class="buttons">
             <button class="clear" onclick="clearDisplay()">C</button>
             <button class="operator" onclick="appendOperator('/')">/</button>
@@ -129,6 +158,7 @@
 
     <script>
         let display = document.getElementById('display');
+        let solution = document.getElementById('solution');
         let currentValue = '0';
         let previousValue = '';
         let operator = null;
@@ -136,6 +166,10 @@
 
         function updateDisplay() {
             display.textContent = currentValue;
+        }
+
+        function updateSolution(text) {
+            solution.textContent = `ASIIMWE... the answer is "${text}"`;
         }
 
         function appendNumber(num) {
@@ -152,6 +186,7 @@
                 }
             }
             updateDisplay();
+            updateSolution(currentValue);
         }
 
         function appendOperator(op) {
@@ -191,6 +226,7 @@
             operator = null;
             shouldResetDisplay = true;
             updateDisplay();
+            updateSolution(currentValue);
         }
 
         function clearDisplay() {
@@ -199,14 +235,17 @@
             operator = null;
             shouldResetDisplay = false;
             updateDisplay();
+            updateSolution('0');
         }
 
         function toggleSign() {
             currentValue = (parseFloat(currentValue) * -1).toString();
             updateDisplay();
+            updateSolution(currentValue);
         }
 
         updateDisplay();
+        updateSolution('0');
     </script>
 </body>
 </html>
